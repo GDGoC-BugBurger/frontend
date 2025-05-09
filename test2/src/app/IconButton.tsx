@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement, CSSProperties } from "react";
 
 interface IconButtonProps {
-  icon: React.ReactElement;
+  icon: ReactElement; // 정확하게 JSX 요소
   onClick?: () => void;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 const IconButton: React.FC<IconButtonProps> = ({ icon, onClick, style }) => {

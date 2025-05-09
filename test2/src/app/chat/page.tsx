@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FiMic, FiSend } from "react-icons/fi";
 import { motion } from "framer-motion";
 import IconButton from "../IconButton";
+import { ReactElement } from "react";
 
 const ChatScreen: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -43,6 +44,9 @@ const ChatScreen: React.FC = () => {
     requestMicPermission();
   }, []);
 
+  const MicIcon: ReactElement = <FiMic size={24} color="#fff" />;
+  const SendIcon: ReactElement = <FiSend size={20} color="#fff" />;
+
   return (
     <div style={styles.container}>
       <div style={styles.header}>
@@ -58,7 +62,7 @@ const ChatScreen: React.FC = () => {
 
       <div style={styles.inputArea}>
         <IconButton
-          icon={<FiMic size={24} color="#fff" />}
+          icon={MicIcon}
           onClick={handleMicClick}
           style={styles.micButton}
         />
@@ -71,22 +75,22 @@ const ChatScreen: React.FC = () => {
           style={styles.input}
         />
         <IconButton
-          icon={<FiSend size={20} color="#fff" />}
-          onClick={handleSend}
-          style={styles.sendButton}
+          icon={MicIcon}
+          onClick={handleMicClick}
+          style={styles.micButton}
         />
-      </div>
 
-      {isRecording && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          style={styles.recordingPopup}
-        >
-          🎤 녹음 중...
-        </motion.div>
-      )}
+        {isRecording && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            style={styles.recordingPopup}
+          >
+            🎤 녹음 중...
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 };
