@@ -5,14 +5,13 @@ import { useRouter } from 'next/navigation';
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [birthdate, setBirthdate] = useState("");
-  const [phone, setPhone] = useState("");
+  const [userId, setuserId] = useState("");
+  const [password, setpassword] = useState("");
   const [saveInfo, setSaveInfo] = useState(false);
   const [autoLogin, setAutoLogin] = useState(false);
 
   const handleLogin = () => {
-    console.log({ name, birthdate, phone, saveInfo, autoLogin });
+    console.log({ userId, password, saveInfo, autoLogin });
     router.push('/chat');
   };
 
@@ -20,24 +19,17 @@ const LoginScreen: React.FC = () => {
     <div style={styles.appContainer}>
       <div style={styles.formContainer}>
         <input
-          type="text"
-          placeholder="이름"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          type="id"
+          placeholder="아이디"
+          value={userId}
+          onChange={(e) => setuserId(e.target.value)}
           style={styles.input}
         />
         <input
-          type="text"
-          placeholder="생년월일 (예: 19450123)"
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-          style={styles.input}
-        />
-        <input
-          type="text"
-          placeholder="전화번호"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          type="password"
+          placeholder="비밀번호"
+          value={password}
+          onChange={(e) => setpassword(e.target.value)}
           style={styles.input}
         />
         <div style={styles.checkboxGroup}>

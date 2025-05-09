@@ -75,9 +75,9 @@ const ChatScreen: React.FC = () => {
           style={styles.input}
         />
         <IconButton
-          icon={MicIcon}
-          onClick={handleMicClick}
-          style={styles.micButton}
+          icon={SendIcon}
+          onClick={handleSend}
+          style={styles.sendButton}
         />
 
         {isRecording && (
