@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+'use client';
+
+import React, { useState, useEffect } from "react";
 import { FiMic, FiSend } from "react-icons/fi";
 import { motion } from "framer-motion";
+import IconButton from "../IconButton";
 
 const ChatScreen: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [inputText, setInputText] = useState("");
 
-  // 마이크 권한 요청
   const requestMicPermission = async () => {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       console.log("마이크 권한이 부여되었습니다.");
-      // 권한이 부여되면 음성 인식 시작 가능
     } catch (err) {
       console.error("마이크 권한이 거부되었습니다.", err);
       alert("마이크 권한이 필요합니다. 권한을 부여해주세요.");
@@ -38,8 +39,7 @@ const ChatScreen: React.FC = () => {
     if (e.key === "Enter") handleSend();
   };
 
-  // 처음에 마이크 권한을 요청하는 함수 호출
-  React.useEffect(() => {
+  useEffect(() => {
     requestMicPermission();
   }, []);
 
@@ -57,9 +57,11 @@ const ChatScreen: React.FC = () => {
       </div>
 
       <div style={styles.inputArea}>
-        <button onClick={handleMicClick} style={styles.micButton}>
-          <FiMic size={24} color="#fff" />
-        </button>
+        <IconButton
+          icon={<FiMic size={24} color="#fff" />}
+          onClick={handleMicClick}
+          style={styles.micButton}
+        />
         <input
           type="text"
           value={inputText}
@@ -68,9 +70,11 @@ const ChatScreen: React.FC = () => {
           placeholder="메시지를 입력하세요"
           style={styles.input}
         />
-        <button onClick={handleSend} style={styles.sendButton}>
-          <FiSend size={20} color="#fff" />
-        </button>
+        <IconButton
+          icon={<FiSend size={20} color="#fff" />}
+          onClick={handleSend}
+          style={styles.sendButton}
+        />
       </div>
 
       {isRecording && (
