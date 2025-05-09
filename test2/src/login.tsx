@@ -16,9 +16,6 @@ const LoginScreen: React.FC = () => {
 
   return (
     <div style={styles.appContainer}>
-      <div style={styles.appHeader}>
-        <h1 style={styles.appTitle}>발음 코치</h1>
-      </div>
       <div style={styles.formContainer}>
         <input
           type="text"
@@ -47,14 +44,16 @@ const LoginScreen: React.FC = () => {
               type="checkbox"
               checked={saveInfo}
               onChange={() => setSaveInfo(!saveInfo)}
-            /> 정보 저장
+            />{" "}
+            정보 저장
           </label>
           <label style={styles.checkboxLabel}>
             <input
               type="checkbox"
               checked={autoLogin}
               onChange={() => setAutoLogin(!autoLogin)}
-            /> 자동 로그인
+            />{" "}
+            자동 로그인
           </label>
         </div>
         <button style={styles.loginButton} onClick={handleLogin}>
@@ -67,61 +66,60 @@ const LoginScreen: React.FC = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   appContainer: {
-    width: "100%",
-    height: "100vh",
     display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#ffcc00",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#ffffff", // 배경을 하얀색으로 통일
+    margin: 0,
+    padding: 0,
     fontFamily: "Arial, sans-serif",
   },
-  appHeader: {
-    padding: "2rem 1rem 1rem",
-    textAlign: "center",
-  },
-  appTitle: {
-    fontSize: "32px",
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
   formContainer: {
-    flex: 1,
-    backgroundColor: "#ffffff",
-    borderTopLeftRadius: "30px",
-    borderTopRightRadius: "30px",
+    width: "90%",
+    maxWidth: "380px", // 폼의 최대 너비
+    backgroundColor: "#ffffff", // 배경 하얀색
+    borderRadius: "20px",
     padding: "2rem 1.5rem",
-    boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.1)",
     display: "flex",
     flexDirection: "column",
-    gap: "1rem",
+    gap: "1.5rem",
   },
   input: {
-    fontSize: "18px",
-    padding: "0.75rem 1rem",
-    borderRadius: "10px",
-    border: "1px solid #ccc",
     width: "100%",
+    padding: "15px",
+    fontSize: "20px", // 큰 글씨
+    borderRadius: "12px",
+    border: "1px solid #ff6600", // 오렌지 색 테두리 추가
+    marginBottom: "1rem",
+    boxSizing: "border-box",
+    outline: "none",
+    color: "#333", // 글자 색은 어두운 회색
   },
   checkboxGroup: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.5rem",
+    gap: "1rem",
+    alignItems: "flex-start",
   },
   checkboxLabel: {
-    fontSize: "16px",
+    fontSize: "18px", // 체크박스 글씨도 크고 읽기 쉽게
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
+    color: "#555", // 체크박스 레이블 텍스트 색상
   },
   loginButton: {
-    fontSize: "20px",
-    padding: "0.75rem",
-    backgroundColor: "#0984e3",
-    color: "#ffffff",
+    width: "100%",
+    padding: "18px",
+    fontSize: "22px", // 큰 글씨
+    backgroundColor: "#ff6600", // 버튼 주황색
+    color: "#fff",
     border: "none",
-    borderRadius: "10px",
+    borderRadius: "12px",
     cursor: "pointer",
     marginTop: "1rem",
-    width: "100%",
+    transition: "background-color 0.3s",
   },
 };
 
