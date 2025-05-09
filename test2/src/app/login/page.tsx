@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 
 const LoginScreen: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [phone, setPhone] = useState("");
@@ -13,7 +13,7 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = () => {
     console.log({ name, birthdate, phone, saveInfo, autoLogin });
-    navigate("/chat");
+    router.push('/chat');
   };
 
   return (
