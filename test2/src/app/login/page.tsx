@@ -2,119 +2,90 @@
 
 import React, { useState } from "react";
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import './LoginScreen.css';
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
-  const [userId, setuserId] = useState("");
-  const [password, setpassword] = useState("");
+  const [username, setUserId] = useState("");
+  const [password, setPassword] = useState("");
   const [saveInfo, setSaveInfo] = useState(false);
   const [autoLogin, setAutoLogin] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    console.log({ userId, password, saveInfo, autoLogin });
-    router.push('/chat');
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/members/sign-in', {
+        username,
+        password,
+      });
+
+      if (response.status === 200 && response.data.success) {
+        // 로그인 성공 시
+        router.push('/chat');
+      } else {
+        setError("아이디 또는 비밀번호가 올바르지 않습니다.");
+      }
+    } catch (err) {
+      setError("서버 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error(err);
+    }
   };
 
   return (
-    <div style={styles.appContainer}>
-      <div style={styles.formContainer}>
-        <input
-          type="id"
-          placeholder="아이디"
-          value={userId}
-          onChange={(e) => setuserId(e.target.value)}
-          style={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setpassword(e.target.value)}
-          style={styles.input}
-        />
-        <div style={styles.checkboxGroup}>
-          <label style={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              checked={saveInfo}
-              onChange={() => setSaveInfo(!saveInfo)}
-            />{" "}
-            정보 저장
-          </label>
-          <label style={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              checked={autoLogin}
-              onChange={() => setAutoLogin(!autoLogin)}
-            />{" "}
-            자동 로그인
-          </label>
-        </div>
-        <button style={styles.loginButton} onClick={handleLogin}>
-          로그인
-        </button>
+    <div className="login-container">
+      <h1 className="login-title">Login</h1>
+      <p className="login-subtitle">Enter your username and password to login</p>
+
+      {error && <p className="error-message">{error}</p>}
+
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUserId(e.target.value)}
+        className="input-field"
+        placeholder="아이디"
+      />
+
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="input-field"
+        placeholder="비밀번호"
+      />
+
+      <div className="checkbox-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={saveInfo}
+            onChange={() => setSaveInfo(!saveInfo)}
+          />
+          정보 저장
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={autoLogin}
+            onChange={() => setAutoLogin(!autoLogin)}
+          />
+          자동 로그인
+        </label>
+      </div>
+
+      <button onClick={handleLogin} className="login-button">
+        로그인
+      </button>
+
+      <div className="help-links">
+        <a href="#">Forgot Username?</a>
+        <a href="#">Forgot Password?</a>
+        <a href="#">Don't have an account? Register</a>
+        <a href="#">Need help? Visit our help center</a>
       </div>
     </div>
   );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  appContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#ffffff", // 배경을 하얀색으로 통일
-    margin: 0,
-    padding: 0,
-    fontFamily: "Arial, sans-serif",
-  },
-  formContainer: {
-    width: "90%",
-    maxWidth: "380px", // 폼의 최대 너비
-    backgroundColor: "#ffffff", // 배경 하얀색
-    borderRadius: "20px",
-    padding: "2rem 1.5rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.5rem",
-  },
-  input: {
-    width: "100%",
-    padding: "15px",
-    fontSize: "20px", // 큰 글씨
-    borderRadius: "12px",
-    border: "1px solid #ff6600", // 오렌지 색 테두리 추가
-    marginBottom: "1rem",
-    boxSizing: "border-box",
-    outline: "none",
-    color: "#333", // 글자 색은 어두운 회색
-  },
-  checkboxGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-    alignItems: "flex-start",
-  },
-  checkboxLabel: {
-    fontSize: "18px", // 체크박스 글씨도 크고 읽기 쉽게
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    color: "#555", // 체크박스 레이블 텍스트 색상
-  },
-  loginButton: {
-    width: "100%",
-    padding: "18px",
-    fontSize: "22px", // 큰 글씨
-    backgroundColor: "#ff6600", // 버튼 주황색
-    color: "#fff",
-    border: "none",
-    borderRadius: "12px",
-    cursor: "pointer",
-    marginTop: "1rem",
-    transition: "background-color 0.3s",
-  },
 };
 
 export default LoginScreen;
