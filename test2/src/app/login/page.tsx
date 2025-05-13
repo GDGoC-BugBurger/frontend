@@ -34,10 +34,8 @@ const LoginScreen: React.FC = () => {
 
   return (
     <div className="login-container">
-      <h1 className="login-title">Login</h1>
-      <p className="login-subtitle">Enter your username and password to login</p>
-
-      {error && <p className="error-message">{error}</p>}
+      <h1 className="login-title">로그인</h1>
+      <p className="login-subtitle"> </p>
 
       <input
         type="text"
@@ -77,6 +75,8 @@ const LoginScreen: React.FC = () => {
       <button onClick={handleLogin} className="login-button">
         로그인
       </button>
+
+      {error && <p className="error-message">{error}</p>}
 
       <div className="help-links">
         <a href="#">Forgot Username?</a>

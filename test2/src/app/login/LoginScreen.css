@@ -5,7 +5,7 @@
     border-radius: 16px;
     background: #ffffff;
     font-family: 'Inter', sans-serif;
-    color: #454B60;
+    color: #091057;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
@@ -35,7 +35,7 @@
     padding: 12px;
     font-size: 16px;
     border-radius: 8px;
-    border: 1px solid #454B60;
+    border: 1px solid #EC8305;
     margin-bottom: 1rem;
     box-sizing: border-box;
   }
@@ -50,7 +50,7 @@
   .login-button {
     width: 100%;
     padding: 14px;
-    background-color: #454B60;
+    background-color: #EC8305;
     color: #fff;
     font-size: 16px;
     font-weight: 700;
@@ -69,10 +69,10 @@
   }
   
   .help-links a {
-    color: #454B60;
+    color: #EC8305;
     text-decoration: none;
   }
-  
+
   @media (max-width: 768px) {
     .login-container {
       border: none;
