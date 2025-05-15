@@ -1,9 +1,9 @@
-import React from "react";
+import { AppProps } from 'next/app';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginScreen from "./app/login/page";
-import ChatScreen from "./app/chat/page";
+import LoginScreen from "../app/login/page";
+import ChatScreen from "../app/chat/page";
 
-const App = () => {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Router>
       <Routes>
@@ -12,6 +12,6 @@ const App = () => {
       </Routes>
     </Router>
   );
-};
+}
 
-export default App;
+export default MyApp;
