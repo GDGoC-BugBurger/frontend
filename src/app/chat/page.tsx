@@ -6,8 +6,11 @@ import { motion } from 'framer-motion';
 import IconButton from '../IconButton';
 import axios from 'axios';
 
+// API 엔드포인트 설정
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 interface ServerResponse {
-  text: string;
+  text?: string;
   audioUrl?: string;
 }
 
@@ -68,7 +71,7 @@ const ChatScreen: React.FC = () => {
 
     try {
       const res = await axios.post<ServerResponse>(
-        'http://localhost:8080/api/chats/speech-to-text',
+        `${API_BASE_URL}/api/chats/speech-to-text`,
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },

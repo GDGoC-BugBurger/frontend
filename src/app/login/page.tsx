@@ -15,13 +15,13 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/members/sign-in', {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+      const response = await axios.post(`${API_BASE_URL}/api/members/sign-in`, {
         username,
         password,
       });
 
       if (response.status === 200 && response.data.success) {
-        // 로그인 성공 시
         router.push('/chat');
       } else {
         setError("아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -79,10 +79,10 @@ const LoginScreen: React.FC = () => {
       {error && <p className="error-message">{error}</p>}
 
       <div className="help-links">
-        <a href="#">Forgot Username?</a>
-        <a href="#">Forgot Password?</a>
-        <a href="#">Don't have an account? Register</a>
-        <a href="#">Need help? Visit our help center</a>
+        <a href="#">아이디 찾기</a>
+        <a href="#">비밀번호 찾기</a>
+        <a href="#">계정이 없으신가요? 회원가입</a>
+        <a href="#">도움이 필요하신가요? 고객센터</a>
       </div>
     </div>
   );
