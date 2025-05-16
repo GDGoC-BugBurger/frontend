@@ -8,7 +8,7 @@ import axios from 'axios';
 
 interface ServerResponse {
   text: string;
-  audioUrl?: string;
+  ai: string;
 }
 
 interface Message {
@@ -76,10 +76,10 @@ const ChatScreen: React.FC = () => {
         }
       );
 
-      const { text, audioUrl } = res.data;
+      const { text, ai } = res.data;
 
-      if (text) setMessages((prev) => [...prev, { type: 'ai', text }]);
-      if (audioUrl) new Audio(audioUrl).play();
+      if (text) setMessages((prev) => [...prev, { type: 'user', text }]);
+      if (ai) setMessages((prev) => [...prev, { type: 'ai', text: ai }]);
     } catch (err) {
       console.error('STT 전송 실패:', err);
       setMessages((prev) => [...prev, { type: 'ai', text: '❌ 음성 인식 실패' }]);
@@ -167,7 +167,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#fffdf4', // 은은한 크림톤
+    backgroundColor: '#fffdf4',
     fontFamily: 'Arial, sans-serif',
     fontSize: '18px',
     position: 'relative',
@@ -196,7 +196,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flex: 1,
     padding: '1rem',
     overflowY: 'auto',
-    backgroundColor: '#fff', // 회색 제거, 흰색으로 통일
+    backgroundColor: '#fff',
   },
   messageText: {
     fontSize: '16px',
@@ -234,7 +234,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '50px',
     height: '50px',
     borderRadius: '50%',
-    backgroundColor: '#ec8305', // Remindly 주색상으로 통일
+    backgroundColor: '#ec8305',
     marginLeft: '0.5rem',
     display: 'flex',
     justifyContent: 'center',
