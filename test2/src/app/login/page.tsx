@@ -15,7 +15,7 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/members/sign-in', {
+      const response = await axios.post('http://api.bugburger.whqtker.site/api/members/sign-in', {
         username,
         password,
       });
@@ -53,24 +53,6 @@ const LoginScreen: React.FC = () => {
         placeholder="비밀번호"
       />
 
-      <div className="checkbox-group">
-        <label>
-          <input
-            type="checkbox"
-            checked={saveInfo}
-            onChange={() => setSaveInfo(!saveInfo)}
-          />
-          정보 저장
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={autoLogin}
-            onChange={() => setAutoLogin(!autoLogin)}
-          />
-          자동 로그인
-        </label>
-      </div>
 
       <button onClick={handleLogin} className="login-button">
         로그인
@@ -79,10 +61,9 @@ const LoginScreen: React.FC = () => {
       {error && <p className="error-message">{error}</p>}
 
       <div className="help-links">
-        <a href="#">Forgot Username?</a>
-        <a href="#">Forgot Password?</a>
-        <a href="#">Don't have an account? Register</a>
-        <a href="#">Need help? Visit our help center</a>
+        <a href="#">아이디를 잊으셨나요?</a>
+        <a href="#">비밀번호를 잊으셨나요?</a>
+        <a href="/signup">회원가입</a>
       </div>
     </div>
   );
